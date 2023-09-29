@@ -62,6 +62,16 @@ button:hover {
     width: 0;
 }
 
+.clear-button {
+    background-color: #BDC3C7;
+    color: #333333;
+}
+
+.del-button {
+    background-color: #BDC3C7; 
+    color: #333333;
+}
+
 .row {
     display: flex; 
     justify-content: space-between;
