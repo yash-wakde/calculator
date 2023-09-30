@@ -51,7 +51,7 @@ button:hover {
     background-color: #C0C0C0;
 }
 
-.operator-button {
+.operator-button, .equal-button {
     background-color: #FFA500; 
     color: #FFFFFF;
     font-size: 24px; 
