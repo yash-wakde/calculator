@@ -2,6 +2,7 @@ const buttons = document.querySelectorAll('.button')
 const calcArea = document.querySelector('.calc-area')
 const operatorButtons = document.querySelectorAll('.operator-button')
 const equalButton = document.querySelector('.equal-button')
+const clearButton = document.querySelector('.clear-button')
 
 let firstNumber = ''
 let secondNumber = ''
@@ -50,6 +51,13 @@ equalButton.addEventListener('click', () => {
             currentOperator = '';
         }
     }
+});
+
+clearButton.addEventListener('click', () => {
+    calcArea.innerText = '0';
+    firstNumber = '';
+    secondNumber = '';
+    currentOperator = '';
 });
 
 function add(a, b) {
