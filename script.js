@@ -63,10 +63,18 @@ clearButton.addEventListener('click', () => {
 
 deleteButton.addEventListener('click', () => {
     if (calcArea.innerText !== '0' && calcArea.innerText !== 'ERROR') {
+        const deletedChar = calcArea.innerText.slice(-1);
         calcArea.innerText = calcArea.innerText.slice(0, -1);
 
-        if (currentOperator === '') {
+        if (calcArea.innerText === '') {
+            calcArea.innerText = '0';
+            firstNumber = '';
+            secondNumber = '';
+            currentOperator = '';
+        } else if (currentOperator === '') {
             firstNumber = calcArea.innerText;
+        } else if (deletedChar === currentOperator) {
+            currentOperator = '';
         } else {
             secondNumber = calcArea.innerText.slice(firstNumber.length + 1);
         }
