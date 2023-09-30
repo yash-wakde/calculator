@@ -3,6 +3,7 @@ const calcArea = document.querySelector('.calc-area')
 const operatorButtons = document.querySelectorAll('.operator-button')
 const equalButton = document.querySelector('.equal-button')
 const clearButton = document.querySelector('.clear-button')
+const deleteButton = document.querySelector('.del-button')
 
 let firstNumber = ''
 let secondNumber = ''
@@ -58,6 +59,18 @@ clearButton.addEventListener('click', () => {
     firstNumber = '';
     secondNumber = '';
     currentOperator = '';
+});
+
+deleteButton.addEventListener('click', () => {
+    if (calcArea.innerText !== '0' && calcArea.innerText !== 'ERROR') {
+        calcArea.innerText = calcArea.innerText.slice(0, -1);
+
+        if (currentOperator === '') {
+            firstNumber = calcArea.innerText;
+        } else {
+            secondNumber = calcArea.innerText.slice(firstNumber.length + 1);
+        }
+    }
 });
 
 function add(a, b) {
