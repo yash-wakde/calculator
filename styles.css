@@ -48,7 +48,7 @@ button {
 }
 
 button:hover {
-    background-color: #c7e2d1;
+    background-color: #999;
 }
 
 .operator-button, .equal-button {
@@ -57,14 +57,14 @@ button:hover {
     font-size: 24px; 
 }
 
-.clear-button, .del-button {
-    flex-grow: 1;
-    width: 0;
+.equal-button{
+    width: 150px;
 }
 
 .clear-button {
     background-color: #FFA500;
     color: #333333;
+    width: 150px;
 }
 
 .del-button {

@@ -11,20 +11,17 @@ let currentOperator = ''
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        if (calcArea.innerText === "0" || calcArea.innerText === "ERROR") {
+        const operatorIndex = calcArea.innerText.indexOf(currentOperator)
+        if (operatorIndex !== -1) {
+            firstNumber = calcArea.innerText.slice(0, operatorIndex);
+            secondNumber = calcArea.innerText.slice(operatorIndex + 1);
+        }
+        if (firstNumber === "0" || secondNumber === "0" || calcArea.innerText === "ERROR" || calcArea.innerText === "0") {
             calcArea.innerText = button.innerText;
         } else {
             calcArea.innerText += button.innerText;
         }
-
-        if (currentOperator === '') {
-            firstNumber = calcArea.innerText; 
-        } else {
-            if (currentOperator !== '') {
-                secondNumber = calcArea.innerText.slice(firstNumber.length + 1);
-            }
-        }
-    });
+    })
 });
 
 operatorButtons.forEach((operator) => {
@@ -34,7 +31,7 @@ operatorButtons.forEach((operator) => {
             opSign = operator.innerText;
             calcArea.innerText += opSign;
         }
-    });
+    })
 });
 
 equalButton.addEventListener('click', () => {
@@ -65,7 +62,6 @@ deleteButton.addEventListener('click', () => {
     if (calcArea.innerText !== '0' && calcArea.innerText !== 'ERROR') {
         const deletedChar = calcArea.innerText.slice(-1);
         calcArea.innerText = calcArea.innerText.slice(0, -1);
-
         if (calcArea.innerText === '') {
             calcArea.innerText = '0';
             firstNumber = '';
