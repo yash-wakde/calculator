@@ -23,7 +23,16 @@ operationButtons.forEach(button =>{
     })
 })
 
-equalsButton.addEventListener('click', operate())
+equalsButton.addEventListener('click', () => {
+  const expression = calcArea.textContent;
+  const parts = expression.split(/([+\-×÷])/);
+  const [operand1, operator, operand2] = parts;
+  
+  if (operand1 && operator && operand2) {
+    const result = operate(operator, parseFloat(operand1), parseFloat(operand2));
+    calcArea.textContent = result;
+  }
+});
 
 
 allClearsButton.addEventListener('click', ()=>{
