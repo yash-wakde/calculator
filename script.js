@@ -1,10 +1,9 @@
-
-const numberButtons = document.querySelectorAll('[data-number]')
-const operationButtons = document.querySelectorAll('[data-operation]')
-const equalsButton = document.querySelector('[data-equals]')
-const deleteButton = document.querySelector('[data-delete]')
-const allClearsButton = document.querySelector('[data-all-clear]')
-const calcArea = document.querySelector('[data-calc-area]')
+const numberButtons = document.querySelectorAll('[data-number]');
+const operationButtons = document.querySelectorAll('[data-operation]');
+const equalsButton = document.querySelector('[data-equals]');
+const deleteButton = document.querySelector('[data-delete]');
+const allClearsButton = document.querySelector('[data-all-clear]');
+const calcArea = document.querySelector('[data-calc-area]');
 
 numberButtons.forEach(button => {
   button.addEventListener('click', () => {
@@ -14,6 +13,7 @@ numberButtons.forEach(button => {
         return;
       }
     }
+
     if (calcArea.textContent === '0' || calcArea.textContent === 'ERROR') {
       calcArea.textContent = button.innerText;
     } else {
@@ -22,7 +22,32 @@ numberButtons.forEach(button => {
   });
 });
 
-function performCalculation() {
+operationButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const expression = calcArea.textContent;
+    const parts = expression.split(/([+\-×÷])/);
+    const [operand1, operator, operand2] = parts;
+
+    if (operand1 && operator && operand2) {
+      const result = operate(operator, parseFloat(operand1), parseFloat(operand2));
+      if (result === 'ERROR') {
+        calcArea.textContent = result;
+      } else {
+        if (Number.isInteger(result)) {
+          calcArea.textContent = result;
+        } else {
+          calcArea.textContent = result.toFixed(1);
+        }
+      }
+    }
+
+    if (!calcArea.textContent.includes('+') && !calcArea.textContent.includes('-') && !calcArea.textContent.includes('×') && !calcArea.textContent.includes('÷')) {
+      calcArea.textContent += button.innerText;
+    }
+  });
+});
+
+equalsButton.addEventListener('click', () => {
   const expression = calcArea.textContent;
   const parts = expression.split(/([+\-×÷])/);
   const [operand1, operator, operand2] = parts;
@@ -35,28 +60,15 @@ function performCalculation() {
       if (Number.isInteger(result)) {
         calcArea.textContent = result;
       } else {
-        calcArea.textContent = result.toFixed(3);
+        calcArea.textContent = result.toFixed(1);
       }
     }
   }
-}
-
-equalsButton.addEventListener('click', performCalculation);
-
-operationButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    if (!calcArea.textContent.includes('+') && !calcArea.textContent.includes('-') && !calcArea.textContent.includes('×') && !calcArea.textContent.includes('÷')) {
-      calcArea.textContent += button.innerText;
-    } else {
-      performCalculation();
-      calcArea.textContent += button.innerText;
-    }
-  });
 });
 
-allClearsButton.addEventListener('click', ()=>{
-    calcArea.textContent = '0'
-})
+allClearsButton.addEventListener('click', () => {
+  calcArea.textContent = '0';
+});
 
 deleteButton.addEventListener('click', () => {
   calcArea.textContent = calcArea.textContent.slice(0, -1);
@@ -66,33 +78,33 @@ deleteButton.addEventListener('click', () => {
 });
 
 function add(a, b) {
-    return a + b
-  }
-  
+  return a + b;
+}
+
 function subtract(a, b) {
-    return a - b
-  }
-  
+  return a - b;
+}
+
 function multiply(a, b) {
-    return a * b
-  }
-  
+  return a * b;
+}
+
 function divide(a, b) {
-    return a / b
-  }
-  
+  return a / b;
+}
+
 function operate(operator, a, b) {
-    switch (operator) {
+  switch (operator) {
     case '+':
-        return add(a, b)
+      return add(a, b);
     case '-':
-        return subtract(a, b)
+      return subtract(a, b);
     case '×':
-        return multiply(a, b)
+      return multiply(a, b);
     case '÷':
-        if (b === 0) return 'ERROR'
-        else return divide(a, b)
+      if (b === 0) return 'ERROR';
+      else return divide(a, b);
     default:
-        return
-    }
+      return;
   }
+}
