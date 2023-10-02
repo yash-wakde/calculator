@@ -39,6 +39,10 @@ allClearsButton.addEventListener('click', ()=>{
     calcArea.textContent = '0'
 })
 
+deleteButton.addEventListener('click', () => {
+  calcArea.textContent = calcArea.textContent.slice(0, -1);
+});
+
 function add(a, b) {
     return a + b
   }

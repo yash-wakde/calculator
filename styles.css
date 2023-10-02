@@ -31,6 +31,10 @@ body{
     margin-bottom: 10px;
     font-size: 28px;
     border: 1px solid #CCCCCC;
+    width: 270px;
+    height: auto;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 button {
