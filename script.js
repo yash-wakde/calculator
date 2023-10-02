@@ -6,16 +6,21 @@ const deleteButton = document.querySelector('[data-delete]')
 const allClearsButton = document.querySelector('[data-all-clear]')
 const calcArea = document.querySelector('[data-calc-area]')
 
-numberButtons.forEach(button =>{
-    button.addEventListener('click', ()=>{
-        if(calcArea.textContent === '0' || calcArea.textContent === 'ERROR'){
-        calcArea.textContent = button.innerText
-        }
-        else{
-        calcArea.textContent += button.innerText
-        }
-    })
-})
+numberButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    if (button.innerText === '.') {
+      const operand = calcArea.textContent.split(/[-+×÷]/).pop();
+      if (operand.includes('.')) {
+        return;
+      }
+    }
+    if (calcArea.textContent === '0' || calcArea.textContent === 'ERROR') {
+      calcArea.textContent = button.innerText;
+    } else {
+      calcArea.textContent += button.innerText;
+    }
+  });
+});
 
 operationButtons.forEach(button => {
   button.addEventListener('click', () => {
