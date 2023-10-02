@@ -22,15 +22,7 @@ numberButtons.forEach(button => {
   });
 });
 
-operationButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    if (!calcArea.textContent.includes('+') && !calcArea.textContent.includes('-') && !calcArea.textContent.includes('×') && !calcArea.textContent.includes('÷')) {
-      calcArea.textContent += button.innerText;
-    }
-  });
-});
-
-equalsButton.addEventListener('click', () => {
+function performCalculation() {
   const expression = calcArea.textContent;
   const parts = expression.split(/([+\-×÷])/);
   const [operand1, operator, operand2] = parts;
@@ -47,7 +39,21 @@ equalsButton.addEventListener('click', () => {
       }
     }
   }
+}
+
+equalsButton.addEventListener('click', performCalculation);
+
+operationButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    if (!calcArea.textContent.includes('+') && !calcArea.textContent.includes('-') && !calcArea.textContent.includes('×') && !calcArea.textContent.includes('÷')) {
+      calcArea.textContent += button.innerText;
+    } else {
+      performCalculation();
+      calcArea.textContent += button.innerText;
+    }
+  });
 });
+
 allClearsButton.addEventListener('click', ()=>{
     calcArea.textContent = '0'
 })
