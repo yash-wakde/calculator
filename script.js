@@ -17,30 +17,41 @@ numberButtons.forEach(button =>{
     })
 })
 
-operationButtons.forEach(button =>{
-    button.addEventListener('click', ()=>{
-        calcArea.textContent += button.innerText
-    })
-})
+operationButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    if (!calcArea.textContent.includes('+') && !calcArea.textContent.includes('-') && !calcArea.textContent.includes('×') && !calcArea.textContent.includes('÷')) {
+      calcArea.textContent += button.innerText;
+    }
+  });
+});
 
 equalsButton.addEventListener('click', () => {
   const expression = calcArea.textContent;
   const parts = expression.split(/([+\-×÷])/);
   const [operand1, operator, operand2] = parts;
-  
+
   if (operand1 && operator && operand2) {
     const result = operate(operator, parseFloat(operand1), parseFloat(operand2));
-    calcArea.textContent = result;
+    if (result === 'ERROR') {
+      calcArea.textContent = result;
+    } else {
+      if (Number.isInteger(result)) {
+        calcArea.textContent = result;
+      } else {
+        calcArea.textContent = result.toFixed(3);
+      }
+    }
   }
 });
-
-
 allClearsButton.addEventListener('click', ()=>{
     calcArea.textContent = '0'
 })
 
 deleteButton.addEventListener('click', () => {
   calcArea.textContent = calcArea.textContent.slice(0, -1);
+  if (calcArea.textContent === '') {
+    calcArea.textContent = '0';
+  }
 });
 
 function add(a, b) {
